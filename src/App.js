@@ -9,6 +9,15 @@ import TextContainer from './components/TextContainer';
 
 class App extends Component {
   // constructor
+  constructor() {
+    super();
+    this.state = {
+      fontColor: 'black',
+      fontSize: 12,
+      fontFamily: 'monospace',
+      allowEdit: 'true'
+    }
+  }
 
   // updateColor
 
@@ -17,18 +26,24 @@ class App extends Component {
   // updateFamily
 
   // updateEditStatus
+  updateStuff=(prop, val) =>{
+    this.setState({
+      [prop]: val
+    })
+  }
 
   render() {
+    const {allowEdit,fontColor,fontFamily,fontSize} = this.state;
     return (
       <div>
         <div className="headerBar">
-          { /* Render EditToggle */ }
-          { /* Render ColorChanger */ }
-          { /* Render SizeChanger */ }
-          { /* Render FamilyChanger */ }
+          { < EditToggle update={this.updateStuff}/>}
+          { < ColorChanger allowEdit={allowEdit} update={this.updateStuff}/>}
+          { < SizeChanger allowEdit={allowEdit} update={this.updateStuff}/>}
+          { < FamilyChanger allowEdit={allowEdit} update={this.updateStuff}/>}
         </div>
         <div className="textArea">
-          { /* Render TextContainer */ }
+          { < TextContainer color={fontColor} fontFamily={fontFamily} fontSize={fontSize}/>}
         </div>
       </div>
     )
